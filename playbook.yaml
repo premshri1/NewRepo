@@ -1,1 +1,22 @@
+- hosts: all
+  name: "Deploying Demo Application"
+  tasks: 
+  - name: install docker
+    yum:
+      name='docker'
+      state=latest
+    become: true
+  - name: install httpd
+    yum:
+      name='httpd'
+      state=latest
+    become: true
+  - name: service httpd
+    yum:
+      name='httpd'
+      state=started
+    become: true
+  - name: install my app
+    shell: |
+      docker run -dit --rm -p 8081:80  rameshmanchala456/ramesh:v2 
 
